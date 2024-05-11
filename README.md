@@ -1,1 +1,1 @@
-this is the real state management for mekelle tigray ciety which is  northern part of tigray 
+this is the real state management for mekelle tigray ciety which is  northern part of tigray. developed buy the group of information technology 

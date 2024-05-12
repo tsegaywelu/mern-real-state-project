@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "e-state",
   "version": "1.0.0",
   "description": "this is for mekelle ciety",
@@ -7,5 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "tsegay welu",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }

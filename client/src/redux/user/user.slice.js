@@ -24,6 +24,8 @@ const userSlice = createSlice({
         logout: (state) => {
             state.currentuser = null
         }
+    }
 })
 
 export const { signinStart, signinSuccess, signinFailure, logout } = userSlice.actions
+export default userSlice.reducer

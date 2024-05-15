@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { signinStart,signinSuccess,signinFailure } from '../redux/user/user.slice';
+import Outh from '../components/Outh';
 
 
 export default function Signin() {
@@ -79,6 +80,7 @@ export default function Signin() {
         >
           {loading ? 'Loading...' : 'Sign in'}
         </button>
+        <Outh />
  
       </form>
       <div className='flex gap-2 mt-5'>

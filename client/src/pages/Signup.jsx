@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Outh from '../components/Outh';
 
 
 export default function SignUp() {
@@ -71,6 +72,7 @@ export default function SignUp() {
         >
           {loading ? 'Loading...' : 'Sign Up'}
         </button>
+        <Outh />
  
       </form>
       <div className='flex gap-2 mt-5'>

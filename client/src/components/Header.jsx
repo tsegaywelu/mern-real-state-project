@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
+
 export function Header() {
-  const { currentUser } = useSelector((state) => state.user);
+  const {  currentuser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -22,6 +23,7 @@ export function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
+  
   return (
     <header className='bg-slate-200 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
@@ -57,11 +59,12 @@ export function Header() {
               About
             </li>
           </Link>
+        
           <Link to='/profile'>
-            {currentUser ? (
+            { currentuser ? (
               <img
                 className='rounded-full h-7 w-7 object-cover'
-                src={currentUser.avatar}
+                src={ currentuser.avatar}
                 alt='profile'
               />
             ) : (

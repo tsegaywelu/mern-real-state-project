@@ -1,21 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-
-import { useDispatch, useSelector } from 'react-redux';
-import { signinStart,signinSuccess,signinFailure } from '../redux/user/user.slice';
 import Outh from '../components/Outh';
 
 
-export default function Signin() {
+export default function SignUp() {
   const [formData, setFormData] = useState({});
-  //const [error, setError] = useState(null);
-  //const [loading, setLoading] = useState(false);
-
-  const { loading, error } = useSelector((state) => state.user);//by default they are null and false
-
-
-  const dispatch = useDispatch();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
@@ -26,9 +17,8 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //setLoading(true);
-   dispatch(signinStart());
-      const res = await fetch('http://localhost:3000/api/auth/signin', {
+      setLoading(true);
+      const res = await fetch('http://localhost:3000/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,27 +28,29 @@ export default function Signin() {
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
-        //setLoading(false)
-        //setError(data.message);
-        dispatch(signinFailure(data.message));
+        setLoading(false);
+        setError(data.message);
         return;
       }
-      //setLoading(false);
-      //setError(null);
-      console.log(data)
-      dispatch(signinSuccess(data));
-      navigate('/');
+      setLoading(false);
+      setError(null);
+      navigate('/signin');
     } catch (error) {
-      //setLoading(false);
-      //setError(error.message);
-      dispatch(signinFailure(error.message));
+      setLoading(false);
+      setError(error.message);
     }
   };
   return (
     <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center font-semibold my-7'>Sign in</h1>
+      <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-       
+        <input
+          type='text'
+          placeholder='username'
+          className='border p-3 rounded-lg'
+          id='username'
+          onChange={handleChange}
+        />
         <input
           type='email'
           placeholder='email'
@@ -78,15 +70,15 @@ export default function Signin() {
           disabled={loading}
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
         >
-          {loading ? 'Loading...' : 'Sign in'}
+          {loading ? 'Loading...' : 'Sign Up'}
         </button>
         <Outh />
  
       </form>
       <div className='flex gap-2 mt-5'>
-        <p>Have an no  account?</p>
-        <Link to={'/signup'}>
-          <span className='text-blue-700'>Sign up</span>
+        <p>Have an account?</p>
+        <Link to={'/signin'}>
+          <span className='text-blue-700'>Sign in</span>
         </Link>
       </div>
       {error && <p className='text-red-500 mt-5'>{error}</p>}

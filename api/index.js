@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 8bf127b4623c7f43627e8bc435036f1ac8664204
 import express from 'express'
 import mongoose from 'mongoose';
 import cors from 'cors'
@@ -50,7 +46,3 @@ app.listen(3000,()=>{
     console.log("check also this if it is working ok thanks for your help to me in the offece 3000");
 })
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8bf127b4623c7f43627e8bc435036f1ac8664204

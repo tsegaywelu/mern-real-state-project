@@ -14,6 +14,9 @@ import {
   deletestart,
   deletesuccess,
   deletefailure,
+  signoutstart,
+  signoutsuccess,
+  signoutfailure,
 } from "../redux/user/user.slice";
 import { useDispatch } from "react-redux";
 
@@ -137,6 +140,30 @@ const Profile = () => {
     }
   };
 
+  const handlelogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      dispatch(signoutstart());
+      const response = await fetch("http://localhost:3000/api/auth/signout", {
+        //default is get so no need to pass method
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (data.success === false) {
+        dispatch(signoutfailure(data.message));
+        return;
+      }
+
+      dispatch(signoutsuccess(data.message));
+    } catch (error) {
+      console.error("Error caught:", error);
+    }
+  };
+
   //console.log(file);
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -205,7 +232,9 @@ const Profile = () => {
         <span className="text-red-700 cursor-pointer" onClick={handledelete}>
           Delete account
         </span>
-        <span className="text-red-700 cursor-pointer">Sign out</span>
+        <span className="text-red-700 cursor-pointer" onClick={handlelogout}>
+          Sign out
+        </span>
       </div>
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
       <p className="text-green-700 mt-5">

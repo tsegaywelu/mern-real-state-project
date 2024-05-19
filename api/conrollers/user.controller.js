@@ -1,13 +1,13 @@
-
+import User from '../models/users.model.js';
 
 import bcryptjs from 'bcryptjs';
 
 export const updateuser = async (req, res) => {
 
 
-    if(req.user.id !== req.params.id){
+    /* if(req.user.id !== req.params.id){
         return res.status(403).json("You can update only your account!");
-    }
+    }  */
 
     try {  
         if(req.body.password){
@@ -26,7 +26,7 @@ export const updateuser = async (req, res) => {
           {
             success:true,
             message:"User updated successfully",
-            data:others
+            user:others
           }
         );
        

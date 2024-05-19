@@ -1,10 +1,11 @@
 
 import express from 'express';
 const router=express.Router();
-import {updateuser} from '../conrollers/user.controller.js';
+import {updateuser,deleteuser} from '../conrollers/user.controller.js';
 import { verifytoken } from '../utilitis/verifyToken.js';
 
 router.patch("/update/:id",  updateuser);
+router.delete("/delete/:id",  deleteuser);
 
 
 

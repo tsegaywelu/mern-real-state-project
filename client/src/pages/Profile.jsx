@@ -147,7 +147,7 @@ const Profile = () => {
     try {
       dispatch(signoutstart());
       const response = await fetch("http://localhost:3000/api/auth/signout", {
-        //default is get so no need to pass method
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
@@ -166,6 +166,30 @@ const Profile = () => {
   };
 
   //console.log(file);
+  const [errorlist, seterrorlist] = useState(false);
+  const showlists = async () => {
+    try {
+      seterrorlist(false);
+      const response = await fetch(
+        `http://localhost:3000/api/user/getlist/${currentuser._id}`,
+        {
+          //default is get so no need to pass method
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (data.success == false) {
+        seterrorlist(true);
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      seterrorlist(true);
+    }
+  };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -246,6 +270,16 @@ const Profile = () => {
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
       <p className="text-green-700 mt-5">
         {updategood ? "user updated succesfully!" : ""}
+      </p>
+      <button
+        onClick={showlists}
+        className="bg-green-700 p-3 rounded-lg w-full max-w-4xl"
+      >
+        show your list
+      </button>
+      <p className="text-red-700 text-sm text-center">
+        {" "}
+        {errorlist ? "there is problem on finding list!" : ""}
       </p>
     </div>
   );

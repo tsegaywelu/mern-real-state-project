@@ -19,6 +19,7 @@ import {
   signoutfailure,
 } from "../redux/user/user.slice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 //later on github i will use this
 // allow read;
@@ -227,6 +228,12 @@ const Profile = () => {
         >
           {loading ? "loading..." : "Update"}
         </button>
+        <Link
+          to="/createlisting"
+          className="bg-green-800 p-3 hover:opacity-95 rounded-lg"
+        >
+          Create listing
+        </Link>
       </form>
       <div className="flex justify-between mt-5">
         <span className="text-red-700 cursor-pointer" onClick={handledelete}>

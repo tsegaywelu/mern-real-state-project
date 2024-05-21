@@ -142,7 +142,7 @@ export default function CreateListing() {
         },
         body: JSON.stringify({
           ...formData,
-          userRef: currentuser._id,
+          userRef: currentuser._id, //we are here sending the user id and it will come back with response and redirect to page
         }),
       });
       const data = await res.json();
@@ -150,7 +150,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`);
+      navigate(`/listing/${data._id}`); //this id is  the user id who creating the listing
     } catch (error) {
       setError(error.message);
       setLoading(false);

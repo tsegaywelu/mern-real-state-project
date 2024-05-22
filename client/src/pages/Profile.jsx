@@ -165,7 +165,6 @@ const Profile = () => {
       console.error("Error caught:", error);
     }
   };
-
   //console.log(file);
 
   //i am feching the lists from back-end
@@ -342,7 +341,9 @@ const Profile = () => {
                 >
                   delete
                 </button>
-                <button className="text-green-700 uppercase">edit</button>
+                <Link to={`/editlisting/${lists._id}`}>
+                  <button className="text-green-700 uppercase">edit</button>
+                </Link>
               </div>
             </div>
           ))}

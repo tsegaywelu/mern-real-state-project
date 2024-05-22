@@ -7,6 +7,7 @@ import Signin from "./pages/signin";
 import PrivateRoute from "./components/Privateroute";
 import Profile from "./pages/Profile";
 import Createlisting from "./pages/Createlisting";
+import Updatelisting from "./pages/Updatelisting";
 
 const App = () => {
   return (
@@ -19,6 +20,10 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/createlisting" element={<Createlisting />} />
+          <Route
+            path="/editlisting/:theidtobeupdated" //here the id is essential for updating
+            element={<Updatelisting />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

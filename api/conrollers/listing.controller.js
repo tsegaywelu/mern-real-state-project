@@ -29,3 +29,34 @@ export const deletelisting = async (req, res, next) => {
     }
   }
 };
+
+export const getlistbyid = async (req, res, next) => {
+  try {
+    const listing = await Listing.findById(req.params.id);
+    return res.status(200).json(listing);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updatelisting = async (req, res, next) => {
+  /* if ( req.user.id !==  req.params.id) {   this  req.user.id  comes from the verify token
+    return next(errorHandler(401, "You can only update your own listings!"));
+  } */
+  try {
+    const findlist = await Listing.findById(req.params.id);
+    if (!findlist) {
+      return next(errorHandler(404, "Listing not found!"));
+    }
+    const updatedListing = await Listing.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    return res.status(200).json(updatedListing);
+  } catch (error) {
+    next(error);
+  }
+};

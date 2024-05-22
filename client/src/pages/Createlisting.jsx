@@ -32,6 +32,7 @@ export default function CreateListing() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(formData);
+  //upload images to firebase and then recive the links  then insert to database
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -39,7 +40,7 @@ export default function CreateListing() {
       const promises = [];
 
       for (let i = 0; i < files.length; i++) {
-        promises.push(storeImage(files[i]));
+        promises.push(storeImage(files[i])); //this store image function go to firebase and returns links
       }
       Promise.all(promises)
         .then((urls) => {
@@ -59,7 +60,7 @@ export default function CreateListing() {
       setUploading(false);
     }
   };
-
+  // called above by the   handleImageSubmit  function to go firebase and return image link
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
@@ -91,7 +92,7 @@ export default function CreateListing() {
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
-
+  //here we have there types of varibales boolean values   and rent or sell
   const handleChange = (e) => {
     if (e.target.id === "sale" || e.target.id === "rent") {
       //for type sell or rent default value is rent
@@ -125,6 +126,8 @@ export default function CreateListing() {
       });
     }
   };
+  // after all to send databse the datas but first images must be upload to firebase and
+  //recive their links from firebase also we are sending the user id to be known who the creator of this lsit
 
   const handleSubmit = async (e) => {
     e.preventDefault();

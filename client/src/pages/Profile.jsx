@@ -46,9 +46,10 @@ const Profile = () => {
 
   useEffect(() => {
     if (file) {
-      handleFileUpload(file);
+      handleFileUpload(file); //if there is file go to upload it
     }
   }, [file]);
+  //first go to firbase and  create link to image profile of user   then upload to database
   const handleFileUpload = (file) => {
     //this works with firbase storage
     const storage = getStorage(app);
@@ -80,7 +81,7 @@ const Profile = () => {
     setformdata({ ...formdata, [e.target.id]: e.target.value });
   };
 
-  // iam sending to the back-end here
+  // i am updating user information
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
@@ -113,7 +114,7 @@ const Profile = () => {
       updateuserfailure(error.message);
     }
   };
-
+  //to delete user account permanently
   const handledelete = async (e) => {
     e.preventDefault();
     try {
@@ -166,6 +167,9 @@ const Profile = () => {
   };
 
   //console.log(file);
+
+  //i am feching the lists from back-end
+  const [mylist, setmylist] = useState([]);
   const [errorlist, seterrorlist] = useState(false);
   const showlists = async () => {
     try {
@@ -184,10 +188,37 @@ const Profile = () => {
       if (data.success == false) {
         seterrorlist(true);
       }
-      console.log(data);
+      setmylist(data);
     } catch (error) {
       console.log(error);
       seterrorlist(true);
+    }
+  };
+
+  //here to delete and edit listings  also mylist variable must updated to remove the deleted list
+
+  const handledeletelist = async (theidtobedeleted) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/listing/deletelisting/${theidtobedeleted}`,
+        {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      showlists();
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
@@ -208,7 +239,6 @@ const Profile = () => {
           alt="profile"
           className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
           onClick={() => fileRef.current.click()}
-          onChange={handlechange}
         />
         <span className="self-center text-sm ">
           {fileuploaderror ? (
@@ -281,6 +311,43 @@ const Profile = () => {
         {" "}
         {errorlist ? "there is problem on finding list!" : ""}
       </p>
+      {mylist && mylist.length > 0 && (
+        <div className="flex flex-col gap-4">
+          <h1 className="text-center mt-7 text-2xl font-semibold">
+            your listing
+          </h1>
+          {mylist.map((lists) => (
+            <div
+              className="border rounded-lg p-3 flex justify-between items-center gap-4"
+              key={lists._id}
+            >
+              <Link to={`listing/${lists._id}`}>
+                <img
+                  src={lists.imageUrls[0]}
+                  alt="dfew"
+                  className="w-16 h-16 object-contain"
+                />
+              </Link>
+              <Link
+                className="text-slate-700 font-semibold hover:underline truncate flex-1"
+                to={`listing/${lists._id}`}
+              >
+                <p>{lists.name}</p>
+              </Link>
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={() => handledeletelist(lists._id)}
+                  //here if there is parenthesis  it does not wait for click it runs immediately so use arrow function
+                  className="text-red-700 uppercase"
+                >
+                  delete
+                </button>
+                <button className="text-green-700 uppercase">edit</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -153,7 +153,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`); //this id is  the user id who creating the listing
+      navigate(`/listing/${data.listing._id}`); //this id is  the user id who creating the listing
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -367,7 +367,8 @@ export default function CreateListing() {
             disabled={loading || uploading}
             className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
           >
-            {loading ? "Creating..." : "Create listing"}
+            {loading ? "Creating..." : "Create listing"}{" "}
+            {/* after i click this it navigates other page look above */}
           </button>
           {error && <p className="text-red-700 text-sm">{error}</p>}
         </div>

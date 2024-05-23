@@ -187,7 +187,7 @@ const Profile = () => {
       if (data.success == false) {
         seterrorlist(true);
       }
-      setmylist(data);
+      setmylist(data.listings);
     } catch (error) {
       console.log(error);
       seterrorlist(true);

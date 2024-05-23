@@ -5,7 +5,10 @@ import { errorHandler } from "../utilitis/error.js";
 export const createListing = async (req, res, next) => {
   try {
     const listing = await Listing.create(req.body);
-    return res.status(201).json(listing);
+    return res.status(201).json({
+      success: true,
+      listing,
+    });
   } catch (error) {
     next(error);
   }
@@ -55,7 +58,11 @@ export const updatelisting = async (req, res, next) => {
       },
       { new: true }
     );
-    return res.status(200).json(updatedListing);
+    return res.status(200).json({
+      success: true,
+      message: "Listing updated successfully",
+      updatedListing,
+    });
   } catch (error) {
     next(error);
   }

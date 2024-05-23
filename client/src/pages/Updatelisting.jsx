@@ -166,7 +166,8 @@ export default function Updatelisting() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`); //this id is  the user id who creating the listing
+
+      navigate(`/listing/${data.updatedListing._id}`); //this id is  the user id who creating the listing
     } catch (error) {
       setError(error.message);
       setLoading(false);

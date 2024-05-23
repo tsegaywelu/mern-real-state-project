@@ -66,3 +66,16 @@ export const getListings = async (req, res, next) => {
     return next(errorHandler(401, "You can only view your own listings!"));
   }
 };
+
+export const getuser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const { password, ...others } = user._doc;
+    res.status(200).json({
+      success: true,
+      user: others,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

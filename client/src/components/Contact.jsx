@@ -48,7 +48,7 @@ export default function Contact({ listing }) {
             className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
           >
             Send Message
-            {/* //here user have to login on mailwindow and sender will me from this and receiver is landlord.email
+            {/* //here user have to login on mailwindow and  receiver is landlord.email
             
             */}
           </Link>

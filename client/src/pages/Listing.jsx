@@ -34,6 +34,7 @@ export default function Listing() {
         setLoading(true);
         const res = await fetch(
           `http://localhost:3000/api/listing/getlist/${params.theidtodisplay}`,
+          //here theidtodisplay must the same with the app.jsx. but we do not care from other pages
           {
             method: "GET",
             headers: {

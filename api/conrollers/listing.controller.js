@@ -1,4 +1,3 @@
-import { log } from "console";
 import Listing from "../models/listing.model.js";
 import { errorHandler } from "../utilitis/error.js";
 
@@ -70,7 +69,7 @@ export const updatelisting = async (req, res, next) => {
 export const searchlist = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit) || 9;
-    const startindex = parseInt(req.query.startindex) || 0;
+    const startindex = parseInt(req.query.startIndex) || 0;
     let offer = req.query.offer;
     if (offer === "false" || offer === undefined) {
       offer = { $in: [false, true] };

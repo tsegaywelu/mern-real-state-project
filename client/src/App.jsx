@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import Createlisting from "./pages/Createlisting";
 import Updatelisting from "./pages/Updatelisting";
 import Listing from "./pages/Listing";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<SignUp />} />
+        {/* /here i am typing the listing page out side of the private route to be shown by users */}
+        <Route path="/listing/:theidtodisplay" element={<Listing />} />
+        <Route path="search" element={<Search />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/createlisting" element={<Createlisting />} />
@@ -25,8 +29,6 @@ const App = () => {
             path="/editlisting/:theidtobeupdated" //here the id is essential for updating
             element={<Updatelisting />}
           />
-          {/* /here i am typing the listing page out side of the private route to be shown by users */}
-          <Route path="/listing/:theidtodisplay" element={<Listing />} />
         </Route>
       </Routes>
     </BrowserRouter>

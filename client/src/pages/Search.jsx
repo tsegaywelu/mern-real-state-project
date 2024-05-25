@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ListingItem from "../components/ListingItem";
+import ListingCard from "../components/ListingCard";
 
 export default function Search() {
   const navigate = useNavigate();
@@ -57,7 +57,9 @@ export default function Search() {
       setLoading(true);
       setShowMore(false);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/listing/get?${searchQuery}`);
+      const res = await fetch(
+        `http://localhost:3000/api/listing/search?${searchQuery}`
+      );
       const data = await res.json();
       if (data.length > 8) {
         setShowMore(true);
@@ -256,7 +258,7 @@ export default function Search() {
           {!loading &&
             listings &&
             listings.map((listing) => (
-              <ListingItem key={listing._id} listing={listing} />
+              <ListingCard key={listing._id} listing={listing} />
             ))}
 
           {showMore && (

@@ -44,7 +44,7 @@ export function Header() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button onclick={handleSubmit}>
+          <button onClick={handleSubmit}>
             <FaSearch className="text-slate-600" />
           </button>
         </form>
